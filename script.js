@@ -1,4 +1,4 @@
-const currentChamp = "philadelphia";
+const currentChamp = "winnipeg";
 
 let nextHome = "";
 let nextVisitor = "";
@@ -108,7 +108,7 @@ const teamPoints = [
   { utah: "0" },
   { vancouver: "0" },
   { washington: "0" },
-  { winnipeg: "0" },
+  { winnipeg: "1" },
 ];
 
 const Lagzdins = document.querySelector(".Lagzdins");
