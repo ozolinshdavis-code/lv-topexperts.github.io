@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Allison&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4&display=swap');
 
 html {
   
@@ -15,7 +15,7 @@ html {
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
   text-align: center;
   color: var(--clr-alternate, var(--clr-secondary));
   background-color: var(--clr-primary);
@@ -57,7 +57,7 @@ img {
 }
 
 .title {
-  font-family: "Allison", cursive;
+  font-family: "Source+Serif+4", cursive;
   font-weight: 700;
   text-transform: none;
   display: inline-block;
