@@ -1,5 +1,6 @@
 const currentChamp = "florida";
 
+let currentChallenger = "";
 let nextHome = "";
 let nextVisitor = "";
 let nextDate;
@@ -50,6 +51,12 @@ fetch("26-27-schedule.json")
         if (Object.values(game).includes(currentChamp)) {
           nextHome = game.home;
           nextVisitor = game.visitor;
+          currentChallenger =
+            currentChamp == game.home ? game.visitor : game.home;
+          document
+            .getElementById(currentChallenger)
+            .parentElement.classList.add("challenger");
+
           nextDate = tempDate;
           found = 1;
         }
