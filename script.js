@@ -17,6 +17,39 @@ function formatDate(date) {
   ].join("-");
 }
 
+function formatDisplayDate(dateStr) {
+  return new Date(dateStr).toLocaleString("en-us", {
+    timeZone: "UTC",
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+// Helper to find the first game for a team starting from (nextGameDayOffset + 1)
+function findNextGameAfter(schedule, team, startOffset) {
+  for (let j = startOffset; j < startOffset + 30; j++) {
+    let futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + j);
+    let formattedFutureDate = formatDate(futureDate);
+
+    if (!schedule[formattedFutureDate]) {
+      continue;
+    }
+
+    for (const game of schedule[formattedFutureDate].games) {
+      if (Object.values(game).includes(team)) {
+        return {
+          date: formattedFutureDate,
+          home: game.home,
+          visitor: game.visitor,
+        };
+      }
+    }
+  }
+  return null;
+}
+
 // schedule and upcoming game widget
 
 fetch("26-27-schedule.json")
@@ -37,17 +70,18 @@ fetch("26-27-schedule.json")
     });
 
     let found = 0;
+    let nextGameDayOffset = 0;
 
-    for (let i = 0; i < 20; i++) {
-      let tempDate = new Date().setDate(new Date().getDate() + i);
-      tempDate = new Date(tempDate);
-      tempDate = formatDate(tempDate);
+    for (let i = 0; i < 30; i++) {
+      let tempDate = new Date();
+      tempDate.setDate(tempDate.getDate() + i);
+      let formattedTempDate = formatDate(tempDate);
 
-      if (!schedule[tempDate]) {
+      if (!schedule[formattedTempDate]) {
         continue;
       }
 
-      schedule[tempDate].games.forEach((game) => {
+      schedule[formattedTempDate].games.forEach((game) => {
         if (Object.values(game).includes(currentChamp)) {
           nextHome = game.home;
           nextVisitor = game.visitor;
@@ -57,7 +91,8 @@ fetch("26-27-schedule.json")
             .getElementById(currentChallenger)
             .parentElement.classList.add("challenger");
 
-          nextDate = tempDate;
+          nextDate = formattedTempDate;
+          nextGameDayOffset = i;
           found = 1;
         }
       });
@@ -67,20 +102,54 @@ fetch("26-27-schedule.json")
 
     // adding date and team logos for the next game
 
-    document.getElementById("date").innerText = new Date(
-      nextDate,
-    ).toLocaleString("en-us", {
-      timeZone: "UTC",
-      weekday: "long",
-      month: "short",
-      day: "numeric",
-    });
+    document.getElementById("date").innerText = formatDisplayDate(nextDate);
     document
       .getElementById("home")
       .setAttribute("src", `logos/${nextHome}.png`);
     document
       .getElementById("away")
       .setAttribute("src", `logos/${nextVisitor}.png`);
+
+    // NEW: Finding and displaying the following game for both possible winners
+    const champNextGame = findNextGameAfter(
+      schedule,
+      currentChamp,
+      nextGameDayOffset + 1,
+    );
+    const challengerNextGame = findNextGameAfter(
+      schedule,
+      currentChallenger,
+      nextGameDayOffset + 1,
+    );
+
+    // 1. If Current Champ retains the Cup
+    document.getElementById("champ-scenario-label").innerText =
+      `If ${currentChamp.replace("-", " ")} wins:`;
+    if (champNextGame) {
+      document.getElementById("champ-next-date").innerText = formatDisplayDate(
+        champNextGame.date,
+      );
+      document
+        .getElementById("champ-next-home")
+        .setAttribute("src", `logos/${champNextGame.home}.png`);
+      document
+        .getElementById("champ-next-away")
+        .setAttribute("src", `logos/${champNextGame.visitor}.png`);
+    }
+
+    // 2. If Challenger wins the Cup
+    document.getElementById("challenger-scenario-label").innerText =
+      `If ${currentChallenger.replace("-", " ")} wins:`;
+    if (challengerNextGame) {
+      document.getElementById("challenger-next-date").innerText =
+        formatDisplayDate(challengerNextGame.date);
+      document
+        .getElementById("challenger-next-home")
+        .setAttribute("src", `logos/${challengerNextGame.home}.png`);
+      document
+        .getElementById("challenger-next-away")
+        .setAttribute("src", `logos/${challengerNextGame.visitor}.png`);
+    }
   });
 
 const teamPoints = [
