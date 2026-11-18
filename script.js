@@ -268,7 +268,7 @@ const cupHistory = [
   { date: "2026-11-11", holder: "vegas", challenger: "utah", winner: "vegas" },
   { date: "2026-11-13", holder: "vegas", challenger: "nashville", winner: "nashville" },
   { date: "2026-11-15", holder: "nashville", challenger: "san-jose", winner: "san-jose" },
-  { date: "2026-11-17", holder: "nashville", challenger: "calgary", winner: "calgary" },
+  { date: "2026-11-17", holder: "san-jose", challenger: "calgary", winner: "calgary" },
 ];
 
 // 1. Automatically map every NHL team to its owner from index.html
