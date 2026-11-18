@@ -270,3 +270,105 @@ dialog::backdrop {
 .scenario-teams p {
   font-size: 0.75rem;
 }
+
+/* ==========================================
+   CUP GAME-BY-GAME HISTORY TABLE
+   ========================================== */
+.history-section {
+  width: 100%;
+  max-width: 750px;
+  margin: 2rem auto 1.5rem auto;
+  padding: 0 0.5rem;
+}
+
+.history-title {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.history-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.history-table th {
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 0.6rem 0.4rem;
+  font-size: 0.72rem;
+  opacity: 0.85;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.history-table td {
+  padding: 0.45rem 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  vertical-align: middle;
+}
+
+.history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.col-num {
+  opacity: 0.6;
+  font-size: 0.75rem;
+  width: 36px;
+}
+
+.col-date {
+  white-space: nowrap;
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.history-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.history-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.loser-logo {
+  opacity: 0.45;
+  filter: grayscale(40%);
+}
+
+.history-vs {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.col-owner {
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+/* Light green semi-transparent highlight for the winning owner */
+.winner-owner {
+  background-color: rgba(74, 222, 128, 0.22);
+  font-weight: 700;
+}
+
+.owner-wins {
+  font-size: 0.72rem;
+  opacity: 0.8;
+  margin-left: 0.2rem;
+}
