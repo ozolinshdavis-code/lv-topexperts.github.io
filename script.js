@@ -287,11 +287,19 @@ players.forEach((playerDiv) => {
   });
 });
 
-// 2. Render the Game-by-Game History Table
+// 2. Render the Game-by-Game History Table (Newest on top, #1 at bottom)
 function renderCupHistory() {
   const tbody = document.getElementById("history-tbody");
   if (!tbody) return;
   tbody.innerHTML = "";
+
+  // Reset running wins before calculating chronologically
+  const ownerRunningWins = {
+    Lagzdins: 0,
+    Zarins: 0,
+    Krists: 0,
+    Davis: 0,
+  };
 
   cupHistory.forEach((game, index) => {
     const gameNum = index + 1;
@@ -311,7 +319,10 @@ function renderCupHistory() {
     const holderWinsAtTime = ownerRunningWins[holderOwner];
     const challengerWinsAtTime = ownerRunningWins[challengerOwner];
 
-    // Format date nicely (e.g., "Oct 8")
+    // Format team names to uppercase without hyphens (e.g., "san-jose" -> "SAN JOSE")
+    const holderTeamName = game.holder.replace("-", " ").toUpperCase();
+    const challengerTeamName = game.challenger.replace("-", " ").toUpperCase();
+
     const shortDate = new Date(game.date).toLocaleString("en-us", {
       timeZone: "UTC",
       month: "short",
@@ -324,8 +335,8 @@ function renderCupHistory() {
       <td class="col-num">${gameNum}</td>
       <td class="col-date">${shortDate}</td>
       <td class="col-owner ${holderWon ? "winner-owner" : ""}">
-        <span class="owner-name">${holderOwner}</span>
-        <span class="owner-wins">(${holderWinsAtTime})</span>
+        <span class="history-team-name">${holderTeamName}</span>
+        <span class="owner-details">(${holderOwner}, ${holderWinsAtTime})</span>
       </td>
       <td class="col-matchup">
         <div class="history-teams">
@@ -335,11 +346,12 @@ function renderCupHistory() {
         </div>
       </td>
       <td class="col-owner ${challengerWon ? "winner-owner" : ""}">
-        <span class="owner-name">${challengerOwner}</span>
-        <span class="owner-wins">(${challengerWinsAtTime})</span>
+        <span class="history-team-name">${challengerTeamName}</span>
+        <span class="owner-details">(${challengerOwner}, ${challengerWinsAtTime})</span>
       </td>
     `;
 
+    // Prepend inserts each newer game at the TOP of the table
     tbody.prepend(tr);
   });
 }
