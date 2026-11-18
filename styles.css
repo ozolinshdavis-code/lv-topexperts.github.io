@@ -223,3 +223,50 @@ img {
 dialog::backdrop {
   background-color: rgba(19, 41, 61, 0.7);
 }
+
+/* Potential Following Matchups Styling */
+.next-scenarios {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.scenario-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  gap: 0.25rem;
+}
+
+.scenario-label {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.scenario-date {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.scenario-teams {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.scenario-teams img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.scenario-teams p {
+  font-size: 0.75rem;
+}
