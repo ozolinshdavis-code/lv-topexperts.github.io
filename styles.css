@@ -367,8 +367,13 @@ dialog::backdrop {
   font-weight: 700;
 }
 
-.owner-wins {
-  font-size: 0.72rem;
-  opacity: 0.8;
+.history-team-name {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.owner-details {
+  font-size: 0.75rem;
+  opacity: 0.85;
   margin-left: 0.2rem;
 }
