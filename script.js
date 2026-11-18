@@ -340,7 +340,7 @@ function renderCupHistory() {
       </td>
     `;
 
-    tbody.appendChild(tr);
+    tbody.prepend(tr);
   });
 }
 
