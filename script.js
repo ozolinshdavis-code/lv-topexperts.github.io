@@ -245,10 +245,30 @@ modalClose.addEventListener("click", () => {
 // The script automatically detects the owners and calculates running win totals!
 const cupHistory = [
   // Example entries based on your current teamPoints (20 games played so far):
-  { date: "2026-10-08", holder: "florida", challenger: "boston", winner: "florida" },
-  { date: "2026-10-10", holder: "florida", challenger: "ottawa", winner: "ottawa" },
-  // ... add your completed games here ...
-  { date: "2026-11-16", holder: "nashville", challenger: "calgary", winner: "calgary" },
+  { date: "2026-09-29", holder: "carolina", challenger: "florida", winner: "florida" },
+  { date: "2026-10-01", holder: "florida", challenger: "san-jose", winner: "san-jose" },
+ { date: "2026-10-03", holder: "san-jose", challenger: "los-angeles", winner: "san-jose" },
+  { date: "2026-10-05", holder: "san-jose", challenger: "dallas", winner: "dallas" },
+  { date: "2026-10-08", holder: "dallas", challenger: "buffalo", winner: "dallas" },
+  { date: "2026-10-10", holder: "dallas", challenger: "pittsburgh", winner: "pittsburgh" },
+  { date: "2026-10-13", holder: "pittsburgh", challenger: "chicago", winner: "chicago" },
+  { date: "2026-10-15", holder: "chicago", challenger: "winnipeg", winner: "chicago" },
+  { date: "2026-10-17", holder: "chicago", challenger: "dallas", winner: "dallas" },
+  { date: "2026-10-20", holder: "dallas", challenger: "boston", winner: "dallas" },
+  { date: "2026-10-22", holder: "dallas", challenger: "winnipeg", winner: "dallas" },
+  { date: "2026-10-25", holder: "dallas", challenger: "ny-islanders", winner: "dallas" },
+  { date: "2026-10-27", holder: "dallas", challenger: "new-jersey", winner: "new-jersey" },
+  { date: "2026-10-28", holder: "new-jersey", challenger: "colorado", winner: "colorado" },
+  { date: "2026-10-31", holder: "colorado", challenger: "calgary", winner: "colorado" },
+  { date: "2026-11-02", holder: "colorado", challenger: "chicago", winner: "colorado" },
+  { date: "2026-11-03", holder: "colorado", challenger: "columbus", winner: "columbus" },
+  { date: "2026-11-05", holder: "columbus", challenger: "dallas", winner: "columbus" },
+  { date: "2026-11-06", holder: "columbus", challenger: "buffalo", winner: "buffalo" },
+  { date: "2026-11-08", holder: "buffalo", challenger: "vegas", winner: "vegas" },
+  { date: "2026-11-11", holder: "vegas", challenger: "utah", winner: "vegas" },
+  { date: "2026-11-13", holder: "vegas", challenger: "nashville", winner: "nashville" },
+  { date: "2026-11-15", holder: "nashville", challenger: "san-jose", winner: "san-jose" },
+  { date: "2026-11-17", holder: "nashville", challenger: "calgary", winner: "calgary" },
 ];
 
 // 1. Automatically map every NHL team to its owner from index.html
