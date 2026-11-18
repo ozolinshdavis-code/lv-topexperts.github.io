@@ -236,3 +236,92 @@ modalOpen.addEventListener("click", () => {
 modalClose.addEventListener("click", () => {
   rulesModal.close();
 });
+
+// ==========================================
+// CUP GAME-BY-GAME HISTORY LOG
+// ==========================================
+
+// Add each completed Cup game here in chronological order.
+// The script automatically detects the owners and calculates running win totals!
+const cupHistory = [
+  // Example entries based on your current teamPoints (20 games played so far):
+  { date: "2026-10-08", holder: "florida", challenger: "boston", winner: "florida" },
+  { date: "2026-10-10", holder: "florida", challenger: "ottawa", winner: "ottawa" },
+  // ... add your completed games here ...
+  { date: "2026-11-16", holder: "nashville", challenger: "calgary", winner: "calgary" },
+];
+
+// 1. Automatically map every NHL team to its owner from index.html
+const teamToOwner = {};
+const ownerRunningWins = {
+  Lagzdins: 0,
+  Zarins: 0,
+  Krists: 0,
+  Davis: 0,
+};
+
+players.forEach((playerDiv) => {
+  const ownerName = playerDiv.classList[0]; // "Lagzdins", "Zarins", "Krists", or "Davis"
+  playerDiv.querySelectorAll(".team-score").forEach((teamEl) => {
+    teamToOwner[teamEl.id] = ownerName;
+  });
+});
+
+// 2. Render the Game-by-Game History Table
+function renderCupHistory() {
+  const tbody = document.getElementById("history-tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  cupHistory.forEach((game, index) => {
+    const gameNum = index + 1;
+    const holderOwner = teamToOwner[game.holder] || "Unknown";
+    const challengerOwner = teamToOwner[game.challenger] || "Unknown";
+
+    const holderWon = game.winner === game.holder;
+    const challengerWon = game.winner === game.challenger;
+
+    // Increment the winning owner's running total at the time of this game
+    if (holderWon && ownerRunningWins[holderOwner] !== undefined) {
+      ownerRunningWins[holderOwner] += 1;
+    } else if (challengerWon && ownerRunningWins[challengerOwner] !== undefined) {
+      ownerRunningWins[challengerOwner] += 1;
+    }
+
+    const holderWinsAtTime = ownerRunningWins[holderOwner];
+    const challengerWinsAtTime = ownerRunningWins[challengerOwner];
+
+    // Format date nicely (e.g., "Oct 8")
+    const shortDate = new Date(game.date).toLocaleString("en-us", {
+      timeZone: "UTC",
+      month: "short",
+      day: "numeric",
+    });
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td class="col-num">${gameNum}</td>
+      <td class="col-date">${shortDate}</td>
+      <td class="col-owner ${holderWon ? "winner-owner" : ""}">
+        <span class="owner-name">${holderOwner}</span>
+        <span class="owner-wins">(${holderWinsAtTime})</span>
+      </td>
+      <td class="col-matchup">
+        <div class="history-teams">
+          <img src="logos/${game.holder}.png" alt="${game.holder}" class="history-logo ${holderWon ? "winner-logo" : "loser-logo"}" />
+          <span class="history-vs">vs</span>
+          <img src="logos/${game.challenger}.png" alt="${game.challenger}" class="history-logo ${challengerWon ? "winner-logo" : "loser-logo"}" />
+        </div>
+      </td>
+      <td class="col-owner ${challengerWon ? "winner-owner" : ""}">
+        <span class="owner-name">${challengerOwner}</span>
+        <span class="owner-wins">(${challengerWinsAtTime})</span>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+}
+
+renderCupHistory();
