@@ -1,4 +1,4 @@
-const currentChamp = "calgary";
+const currentChamp = "minnesota";
 
 let currentChallenger = "";
 let nextHome = "";
@@ -167,7 +167,7 @@ const teamPoints = [
   { florida: "1" },
   { vegas: "2" },
   { "los-angeles": "0" },
-  { minnesota: "0" },
+  { minnesota: "1" },
   { montreal: "0" },
   { nashville: "1" },
   { "new-jersey": "1" },
@@ -269,6 +269,7 @@ const cupHistory = [
   { date: "2026-11-13", holder: "vegas", challenger: "nashville", winner: "nashville" },
   { date: "2026-11-15", holder: "nashville", challenger: "san-jose", winner: "san-jose" },
   { date: "2026-11-17", holder: "san-jose", challenger: "calgary", winner: "calgary" },
+  { date: "2026-11-19", holder: "calgary", challenger: "minnesota", winner: "minnesota" },
 ];
 
 // 1. Automatically map every NHL team to its owner from index.html
